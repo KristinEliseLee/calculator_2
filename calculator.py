@@ -24,11 +24,15 @@ quit_list = ["q", "quit"]
 
 
 def calculate(math_string):
+    """ Takes a single string and performs the math function specified at the 
+    beginning on all following numbers. Returns a string with calculation or 
+    user error info.
+    """
 
     tokens = math_string.split()
     operator = tokens[0]
     if operator not in operations:
-        return "BAD USER!!!"
+        return "INVALID INPUT!!!"
     try:
         for idx in range(1, len(tokens)):
             tokens[idx] = float(tokens[idx])
@@ -41,7 +45,7 @@ def calculate(math_string):
 
 while True:
 
-    print("Please choose an option")
+    print("Please choose an option, or type q to quit.")
     print()
     print("1. User input prefix calculator")
     print("2. Prefix calculate from text")
