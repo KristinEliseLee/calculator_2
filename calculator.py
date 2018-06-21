@@ -20,25 +20,49 @@ operations = {
     "cubes+": arithmetic.add_cubes
     }
 
+quit_list = ["q", "quit"]
 
-# Your code goes here
-while True:
 
-    user_input = input("> ").lower()
+def calculate(math_string):
 
-    if user_input == "q" or user_input == "quit":
-        break
-
-    tokens = user_input.split()
+    tokens = math_string.split()
     operator = tokens[0]
     if operator not in operations:
-        print("BAD USER!!!")
-        continue
+        return "BAD USER!!!"
     try:
         for idx in range(1, len(tokens)):
             tokens[idx] = float(tokens[idx])
     except ValueError:
-        print("USE NUMBERS!!!")
+        return "USE NUMBERS!!!"
     else:
         nums = tokens[1:]
-        print("{:.2f}".format(operations[operator](nums)))
+        return "{:.2f}".format(operations[operator](nums))
+
+
+while True:
+
+    print("Please choose an option")
+    print()
+    print("1. User input prefix calculator")
+    print("2. Prefix calculate from text")
+
+    user_input = input("> ").lower()
+
+    if user_input in quit_list:
+        break
+    elif user_input == "1":
+        print("You have chosen the user calculator")
+        while True:
+            math_string = input("> ").lower()
+            if math_string in quit_list:
+                break
+            print(calculate(math_string))
+    elif user_input == "2":
+        file = open("math-to-do.txt")
+        for line in file:
+            line = line.rstrip()
+            print(calculate(line))
+
+        file.close()
+    else:
+        print("That was not a valid option")
