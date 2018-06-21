@@ -1,12 +1,18 @@
 """Math functions for calculator."""
 import functools
-# def reduce(lambda , lst):
-#     answer = lst[0]
-#     if len(lst)> 1:
-#         for num in lst:
-#             if operator == "+":
+def reduce(function, lst):
+    if len(lst) == 1:
+        return lst[0]
+    elif len(lst) == 0:
+        return "list is empty"
+    else:
+        answer = lst[0]
+        for num in lst[1:]:
+            answer = function(answer, num)
 
-#     return answer
+        return answer
+
+
 
 
 
@@ -25,7 +31,7 @@ def subtract(nums):
 
     # return answer
 
-    return functools.reduce(lambda x, y: x-y, nums)
+    return reduce(lambda x, y: x-y, nums)
 
 
 def multiply(nums):
@@ -38,7 +44,7 @@ def multiply(nums):
     # return answer
     return functools.reduce(lambda x, y: x*y, nums)
 
-def divide(num1, num2, num3= 0):
+def divide(nums):
     """Divide the first input by the second and return the result."""
 
     # answer = nums[0]
